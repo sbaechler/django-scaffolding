@@ -18,9 +18,9 @@ Create a Scaffolding class within your model which contains the callbacks to fil
         ...
         
         class Scaffolding:
-            first_name = scaffolding.first_name(max_length=32)
-            last_name = scaffolding.last_name(max_length=32)
-            comment = scaffolding.lorem(paragraphs=1)
+            first_name = scaffolding.FirstNname(max_length=32)
+            last_name = scaffolding.LastNname(max_length=32)
+            comment = scaffolding.LoremIpsum(paragraphs=1)
             
 
 Run the management command to create the data::
