@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import os
 import random
 from scaffolding import library
 from library.lorem_ipsum import LOREM_IPSUM
+import urllib
+from django.core.files import File
 
 class Tube(object):
     """ The base class for scaffolding objects.
@@ -61,8 +64,9 @@ class RandInt(Tube):
         return random.randint(self.min, self.max)
 
 
-class Contrib(Tube):
+class Contrib(object):
     """ Crates a Custom Object. The backend class is the first parameter.
+        The backend class has to inherit from Tube.
     """
     def __init__(self, backend, **kwargs):
         self.backend = backend(**kwargs)
@@ -86,3 +90,17 @@ class AlwaysFalse(Tube):
     """
     def next(self):
         return False
+
+
+class RandomInternetImage(Tube):
+    """ Creates a random image for an ImageField using an internet source.
+    """
+    def __init__(self, backend, **kwargs):
+        super(RandomInternetImage, self).__init__(**kwargs)
+        self.backend = backend(**kwargs)
+
+    def next(self):
+        # returns a filename and File object, ready to be fed to the image.save() method.
+        url = self.backend.next()
+        temp_image = urllib.urlretrieve(url)
+        return os.path.basename(url), File(open(temp_image[0]))

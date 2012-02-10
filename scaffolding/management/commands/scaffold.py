@@ -45,10 +45,10 @@ class Command(BaseCommand):
                 generator, kwargs = getattr(cls.Scaffolding, field_name)
                 fields[field_name] = generator(count=count, cls=cls, **kwargs)
                 text += u'%s: %s; ' % (field_name, fields[field_name])
-            if hasattr(cls.Scaffolding, '%s_id' % field_name):
-                generator, kwargs = getattr(cls.Scaffolding, '%s_id' % field_name)
-                fields['%s_id' % field_name] = generator(count=count, cls=cls, **kwargs)
-                text += u'%s_id: %s; ' % (field_name, fields['%s_id' % field_name])
+#            if hasattr(cls.Scaffolding, '%s_id' % field_name):
+#                generator, kwargs = getattr(cls.Scaffolding, '%s_id' % field_name)
+#                fields['%s_id' % field_name] = generator(count=count, cls=cls, **kwargs)
+#                text += u'%s_id: %s; ' % (field_name, fields['%s_id' % field_name])
 
         self.stdout.write(u'Generator for %s: %s\n' % (cls, text))
 
@@ -59,8 +59,17 @@ class Command(BaseCommand):
         self.stdout.write(u'\nCreated new %s: ' % obj)
 
         for field_name, generator in fields.items():
+            # Some custom processing
+            field = cls._meta.get_field(field_name)
             value = generator.next()
-            setattr(obj, field_name, value)
-            self.stdout.write(u'%s: %s; ' % (field_name, value))
-
+            if isinstance(field, models.fields.related.ForeignKey) and isinstance(value, int):
+                field_name = u'%s_id' % field_name
+            if isinstance(field, models.fields.files.ImageField):
+                getattr(obj, field_name).save(*value, save=False)
+            else:
+                setattr(obj, field_name, value)
+            try:
+                self.stdout.write(u'%s: %s; ' % (field_name, value))
+            except UnicodeEncodeError:
+                pass
         obj.save()
