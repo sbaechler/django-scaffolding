@@ -47,7 +47,12 @@ class LoremIpsum(Tube):
             raise AttributeError('The Text %s only has %s paragraphs' %(text, len(text)))
 
     def next(self):
-        text = u'\n\n'.join(self.text[:self.paragraphs])
+        if self.paragraphs < len(self.text):
+            late_start = len(self.text) - self.paragraphs - 1
+            start = random.randint(0, late_start)
+        else:
+            start = 0
+        text = u'\n\n'.join(self.text[start:(start+self.paragraphs)])
         if self.max_length:
             return text[:self.max_length]
         return text
