@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import random
+import gc
 from scaffolding import library
 from library.lorem_ipsum import LOREM_IPSUM
 import urllib
@@ -109,3 +110,20 @@ class RandomInternetImage(Tube):
         url = self.backend.next()
         temp_image = urllib.urlretrieve(url)
         return os.path.basename(url), File(open(temp_image[0]))
+
+class ForeignKey(Tube):
+    """ Creates a foreign key assigning the queryset.
+    """
+    def __init__(self, queryset, chunksize=100, wrap=True, **kwargs):
+        super(ForeignKey, self).__init__(**kwargs)
+        self.queryset = queryset.order_by('pk')[:chunksize]
+        self.wrap = wrap
+        self.length = len(self.queryset)
+        self.i = 0
+
+    def next(self):
+        if self.i == (self.length-1):
+            self.i = 0
+            return self.queryset[0]
+        self.i += 1
+        return self.queryset[self.i]
