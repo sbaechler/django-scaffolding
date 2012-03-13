@@ -7,12 +7,12 @@ from django.conf import settings
 from django.utils.importlib import import_module
 
 from tubes import (Tube, Name, LoremIpsum, RandInt, Contrib, AlwaysTrue,
-                AlwaysFalse, RandomInternetImage, ForeignKey)
+    AlwaysFalse, StaticValue, RandomValue, RandomInternetImage, ForeignKey)
 
 
 __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
-    'AlwaysFalse', 'RandomInternetImage', 'ForeignKey', 'register',
-    'scaffold_for_model']
+    'AlwaysFalse', 'StaticValue', 'RandomValue', 'RandomInternetImage',
+    'ForeignKey', 'register', 'scaffold_for_model']
 
 
 def generic_autodiscover(module_name):

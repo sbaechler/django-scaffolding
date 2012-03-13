@@ -10,8 +10,7 @@ class Tube(object):
     """ The base class for scaffolding objects.
     """
     def __init__(self, **kwargs):
-        self.count = kwargs.get('count')
-        self.cls = kwargs.get('cls')
+        pass
 
     def __iter__(self):
         return self
@@ -97,6 +96,23 @@ class AlwaysFalse(Tube):
         return False
 
 
+class StaticValue(Tube):
+    """Always returns the same value"""
+
+    def __init__(self, value):
+        self.value = value
+    def next(self):
+        return self.value
+
+
+class RandomValue(Tube):
+    """Returns random values from the passed list"""
+    def __init__(self, lst):
+        self.lst = lst
+    def next(self):
+        return random.choice(self.lst)
+
+
 class RandomInternetImage(Tube):
     """ Creates a random image for an ImageField using an internet source.
     """
@@ -109,6 +125,7 @@ class RandomInternetImage(Tube):
         url = self.backend.next()
         temp_image = urllib.urlretrieve(url)
         return os.path.basename(url), File(open(temp_image[0]))
+
 
 class ForeignKey(Tube):
     """ Creates a foreign key assigning the queryset.
