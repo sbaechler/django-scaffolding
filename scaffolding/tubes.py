@@ -113,6 +113,20 @@ class RandomValue(Tube):
         return random.choice(self.lst)
 
 
+class EveryValue(Tube):
+    """
+    Yields values from the passed iterable in order, looping into infinity.
+    """
+    def __init__(self, values, **kwargs):
+        self.index = -1
+        self.values = list(values)
+        self.length = len(self.values)
+
+    def next(self):
+        self.index += 1
+        return self.values[self.index % self.length]
+
+
 class RandomInternetImage(Tube):
     """ Creates a random image for an ImageField using an internet source.
     """
