@@ -130,10 +130,9 @@ class RandomInternetImage(Tube):
 class ForeignKey(Tube):
     """ Creates a foreign key assigning the queryset.
     """
-    def __init__(self, queryset, chunksize=100, wrap=True, **kwargs):
+    def __init__(self, queryset, chunksize=100, **kwargs):
         super(ForeignKey, self).__init__(**kwargs)
         self.queryset = queryset.order_by('pk')[:chunksize]
-        self.wrap = wrap
         self.length = len(self.queryset)
         self.i = 0
 
