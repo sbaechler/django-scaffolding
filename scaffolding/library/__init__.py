@@ -20,17 +20,14 @@ class FirstNames(object):
             self.first_names = male_names + female_names
             random.shuffle(self.first_names)
         self.index = 0
+        self.length = len(self.first_names)
 
     def __iter__(self):
         return self
 
     def next(self):
-        # infinite iteration
-        if self.index == len(self.first_names)-1:
-            self.index = 0
-            return self.first_names[0]
         self.index += 1
-        return self.first_names[self.index]
+        return self.first_names[self.index % self.length]
 
 
 GERMAN_LAST_NAMES = [u'Müller', u'Schmid', u'Schneider', u'Fischer', u'Weber', u'Meyer',
@@ -43,13 +40,11 @@ class LastNames(object):
     def __init__(self, last_names=GERMAN_LAST_NAMES, *args, **kwargs):
         self.last_names = last_names
         self.index = 0
+        self.length = len(self.last_names)
 
     def __iter__(self):
         return self
 
     def next(self):
-        if self.index == len(self.last_names)-1:
-            self.index = 0
-            return self.last_names[0]
         self.index += 1
-        return self.last_names[self.index]
+        return self.last_names[self.index % self.length]
