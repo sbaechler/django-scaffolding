@@ -48,13 +48,9 @@ class Command(BaseCommand):
         for field_name in field_names:
             generator = getattr(scaffold, field_name, None)
             if generator:
+                generator.set_up(cls, count)
                 fields[field_name] = generator
                 text.append(u'%s: %s; ' % (field_name, fields[field_name]))
-
-#            if hasattr(cls.Scaffolding, '%s_id' % field_name):
-#                generator, kwargs = getattr(cls.Scaffolding, '%s_id' % field_name)
-#                fields['%s_id' % field_name] = generator(count=count, cls=cls, **kwargs)
-#                text += u'%s_id: %s; ' % (field_name, fields['%s_id' % field_name])
 
         self.stdout.write(u'Generator for %s: %s\n' % (cls, u''.join(text)))
 

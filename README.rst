@@ -7,12 +7,11 @@ Django-Scaffolding creates placeholder data for your app.
 Usage
 =====
 
-Create a Scaffolding class within your model which contains the callbacks to
-fill it with the necesarry data.
+Create a ``scaffolds.py`` module within your app directory which contains the Scaffolding classes.
 
 Sample ``models.py``::
 
-    class MyModel(models.Model):
+    class Entry(models.Model):
         first_name = models.CharField('First Name', max_length=32)
         last_name = models.CharField('Last Name', max_length=32)
         comment = models.TextField('Comment')
@@ -20,29 +19,27 @@ Sample ``models.py``::
         contest = models.ForeignKey(Contest)
         ...
 
-Sample ``scaffold.py``::
+Sample ``scaffolds.py``::
 
     import scaffolding
-    from scaffolding.external.facebook_graph import FacebookTestUser
     from scaffolding.library.flickr import FlickrInteresting
 
     from myapp.models import Customer
 
-    class CustomerScaffold(object):
+    class EntryScaffold(object):
         first_name = scaffolding.FirstName(max_length=32)
         last_name = scaffolding.LastName(max_length=32)
         comment = scaffolding.LoremIpsum(paragraphs=1)
-        contest = scaffolding.RandInt(min=1, max=2)
+        contest = scaffolding.ForeignKey(queryset=Contest.objects.filter(name='testcontest'))
         image = scaffolding.RandomInternetImage(backend=FlickrInteresting)
 
-    scaffolding.register(Customer, CustomerScaffold)
+    scaffolding.register(Entry, EntryScaffold)
 
-Mind the syntax for ForeignKey fields. You can assign an integer to the field.
-But make sure the element with the corresponding key does exist. Of course you
-can also assign an object to the FK field.
+Mind the syntax for ForeignKey fields. You can assign an integer to the field
+but make sure the element with the corresponding key does exist. 
+Of course you can also assign an object to the FK field.
 
 To use the flickr library you need to have the Flickr API: http://stuvel.eu/flickrapi installed.
-
 
 Run the management command to create the data::
 
@@ -90,6 +87,13 @@ RandInt
 
 Generates a random integer between min and max.
 
+ForeignKey
+----------
+
+Takes a queryset and iterates through it. Assigns the
+item as ForeignKeys to the field. Wraps around if there
+are not enough items.
+
 RandomInternetImage
 -------------------
 
@@ -117,4 +121,6 @@ FacebookTestUser
 
 Creates a Facebook User from the test users pool of the Facebook app.
 If there aren't enough test users new ones are automatically created.
+This requires the django-facebook-graph API.
+https://github.com/feinheit/django-facebook-graph
 

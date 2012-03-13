@@ -4,7 +4,7 @@ import os
 import random
 import urllib
 
-from library import lorem_ipsum, names
+from scaffolding.library import lorem_ipsum, names
 from django.core.files import File
 
 class Tube(object):
@@ -15,6 +15,11 @@ class Tube(object):
 
     def __iter__(self):
         return self
+    
+    def set_up(self, cls, count, **kwargs):
+        """ This is a hook for doing validations 
+            kwargs for future compatibility.
+        """
 
     def next(self):
         raise NotImplementedError('You need to implement your own next method.')
@@ -48,6 +53,8 @@ class EveryValue(Tube):
         self.length = len(self.values)
 
     def next(self):
+        if self.length == 0:
+            raise StopIteration
         self.index += 1
         return self.values[self.index % self.length]
 

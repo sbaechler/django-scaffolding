@@ -4,7 +4,7 @@ from facebook.api import GraphAPIError
 from facebook.models import TestUser, User
 from facebook.testusers import TestUsers
 from facebook.utils import get_app_dict, get_static_graph
-from scaffolding import Tube
+from scaffolding.tubes import Tube
 
 
 class FacebookTestUser(Tube):
@@ -16,25 +16,16 @@ class FacebookTestUser(Tube):
         self.graph = get_static_graph(self.app_name)
         self.testusers = TestUsers(self.graph)
         self.users = []
+        self.index = 0
 
-        try:
-            print u'Checking for Facebook Test users...:\n'
-        except IOError:
-            pass
+    def __iter__(self):
+        return self
+    
+    def set_up(self, cls, count, **kwargs):
         testuser_list = self.testusers.get_test_users()
-        for testuser in testuser_list:
-            user, created = User.objects.get_or_create(id=int(testuser.id))
-            if created:
-                user.get_from_facebook(self.graph, save=True)
-            self.users.append(user)
-
-        try:
-            print u'Done. Found %s testusers.' % len(testuser_list)
-        except IOError:
-            pass
-
-        if self.count and self.count > len(testuser_list):
-            remaining = self.count-len(testuser_list)
+        
+        if count and count > len(testuser_list):
+            remaining = count-len(testuser_list)
             try:
                 print 'Not enough Test users (%s). Generating %s more.\n' %(len(testuser_list),
                                                                 self.count-len(testuser_list))
@@ -42,11 +33,22 @@ class FacebookTestUser(Tube):
                 pass
             for i in range(remaining):
                 self.generate_new_user()
-
-        self.index = 0
-
-    def __iter__(self):
-        return self
+        self.user_for_testuser(testuser_list)
+    
+    def user_for_testuser(self, testuser_list):
+        try:
+            print u'Checking for Facebook Test users...:\n'
+        except IOError:
+            pass
+        for testuser in testuser_list:
+            user, created = User.objects.get_or_create(id=int(testuser.id))
+            if created:
+                user.get_from_facebook(self.graph, save=True)
+            self.users.append(user)
+        try:
+            print u'Done. Found %s testusers.' % len(testuser_list)
+        except IOError:
+            pass
 
     def generate_new_user(self):
         newuser = self.testusers.generate_new_test_user(installed=True, permissions=['email'])

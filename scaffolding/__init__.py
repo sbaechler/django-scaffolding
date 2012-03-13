@@ -17,14 +17,6 @@ __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
 
 
 def generic_autodiscover(module_name):
-    """
-    I have copy/pasted this code too many times...Dynamically autodiscover a
-    particular module_name in a django project's INSTALLED_APPS directories,
-    a-la django admin's autodiscover() method.
-
-    Usage:
-        generic_autodiscover('commands') <-- find all commands.py and load 'em
-    """
 
     for app in settings.INSTALLED_APPS:
         try:
@@ -51,6 +43,6 @@ def scaffold_for_model(model):
 
     """
     # Load scaffold modules of all INSTALLED_APPS
-    generic_autodiscover('scaffold')
+    generic_autodiscover('scaffolds')
 
     return _registry[model]
