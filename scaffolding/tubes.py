@@ -20,6 +20,37 @@ class Tube(object):
 
 #---------- custom classes -----------------
 
+class StaticValue(Tube):
+    """Always returns the same value"""
+
+    def __init__(self, value):
+        self.value = value
+    def next(self):
+        return self.value
+
+
+class RandomValue(Tube):
+    """Returns random values from the passed list"""
+    def __init__(self, lst):
+        self.lst = lst
+    def next(self):
+        return random.choice(self.lst)
+
+
+class EveryValue(Tube):
+    """
+    Yields values from the passed iterable in order, looping into infinity.
+    """
+    def __init__(self, values, **kwargs):
+        self.index = -1
+        self.values = list(values)
+        self.length = len(self.values)
+
+    def next(self):
+        self.index += 1
+        return self.values[self.index % self.length]
+
+
 class Name(Tube):
     """ Generates a random name. <gender> can be 'male', 'female', 'm' or 'f'.
     """
@@ -82,49 +113,16 @@ class Contrib(object):
         return self.backend.next()
 
 
-class AlwaysTrue(Tube):
-    """ Always returns True.
-    """
-    def next(self):
-        return True
+class AlwaysTrue(StaticValue):
+    """ Always returns True."""
+    def __init__(self):
+        self.value = True
 
 
-class AlwaysFalse(Tube):
-    """ Always returns False.
-    """
-    def next(self):
-        return False
-
-
-class StaticValue(Tube):
-    """Always returns the same value"""
-
-    def __init__(self, value):
-        self.value = value
-    def next(self):
-        return self.value
-
-
-class RandomValue(Tube):
-    """Returns random values from the passed list"""
-    def __init__(self, lst):
-        self.lst = lst
-    def next(self):
-        return random.choice(self.lst)
-
-
-class EveryValue(Tube):
-    """
-    Yields values from the passed iterable in order, looping into infinity.
-    """
-    def __init__(self, values, **kwargs):
-        self.index = -1
-        self.values = list(values)
-        self.length = len(self.values)
-
-    def next(self):
-        self.index += 1
-        return self.values[self.index % self.length]
+class AlwaysFalse(StaticValue):
+    """ Always returns False."""
+    def __init__(self):
+        self.value = False
 
 
 class RandomInternetImage(Tube):
@@ -141,18 +139,8 @@ class RandomInternetImage(Tube):
         return os.path.basename(url), File(open(temp_image[0]))
 
 
-class ForeignKey(Tube):
-    """ Creates a foreign key assigning the queryset.
+class ForeignKey(EveryValue):
+    """ Creates a foreign key assigning items from the queryset.
     """
     def __init__(self, queryset, chunksize=100, **kwargs):
-        super(ForeignKey, self).__init__(**kwargs)
-        self.queryset = queryset.order_by('pk')[:chunksize]
-        self.length = len(self.queryset)
-        self.i = 0
-
-    def next(self):
-        if self.i == (self.length-1):
-            self.i = 0
-            return self.queryset[0]
-        self.i += 1
-        return self.queryset[self.i]
+        super(ForeignKey, self).__init__(queryset[:chunksize])
