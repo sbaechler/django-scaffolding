@@ -1,1 +1,10 @@
 *.pyc
+*~
+.*.swp
+\#*#
+/docs/_build
+/django
+/example
+/dist
+/build
+/MANIFEST
