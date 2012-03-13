@@ -1,9 +1,10 @@
+from __future__ import absolute_import
+
 import os
 import random
-import gc
-from scaffolding import library
-from library.lorem_ipsum import LOREM_IPSUM
 import urllib
+
+from library import lorem_ipsum, names
 from django.core.files import File
 
 class Tube(object):
@@ -57,8 +58,8 @@ class Name(Tube):
     def __init__(self, max_length=30, gender=None, **kwargs):
         super(Name, self).__init__(**kwargs)
         self.max_length = max_length
-        self.first_names = library.FirstNames(gender=gender)
-        self.last_names = library.LastNames()
+        self.first_names = names.FirstNames(gender=gender)
+        self.last_names = names.LastNames()
 
     def next(self):
         return '%s %s'[:self.max_length] % (self.first_names.next(), self.last_names.next())
@@ -67,7 +68,7 @@ class Name(Tube):
 class LoremIpsum(Tube):
     """ Generates a Lorem Ipsum Text. The number of paragraphs is defined in paragraphs.
     """
-    def __init__(self, paragraphs=7, max_length=None, text=LOREM_IPSUM, **kwargs):
+    def __init__(self, paragraphs=7, max_length=None, text=lorem_ipsum.LOREM_IPSUM, **kwargs):
         super(LoremIpsum, self).__init__(**kwargs)
         self.text = text
         self.max_length = max_length
