@@ -48,7 +48,8 @@ class Command(BaseCommand):
         for field_name in field_names:
             generator = getattr(scaffold, field_name, None)
             if generator:
-                generator.set_up(cls, count)
+                if hasattr(generator, 'set_up'):
+                    generator.set_up(cls, count)
                 fields[field_name] = generator
                 text.append(u'%s: %s; ' % (field_name, fields[field_name]))
 
