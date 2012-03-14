@@ -67,7 +67,7 @@ class Command(BaseCommand):
             value = generator.next()
             if isinstance(field, models.fields.related.ForeignKey) and isinstance(value, int):
                 field_name = u'%s_id' % field_name
-            if isinstance(field, models.fields.files.ImageField):
+            if isinstance(field, models.fields.files.FileField):
                 getattr(obj, field_name).save(*value, save=False)
             else:
                 setattr(obj, field_name, value)
