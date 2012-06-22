@@ -69,7 +69,17 @@ class Name(Tube):
         self.last_names = names.LastNames()
 
     def next(self):
-        return '%s %s'[:self.max_length] % (self.first_names.next(), self.last_names.next())
+        return u'%s %s'[:self.max_length] % (self.first_names.next(), self.last_names.next())
+
+class FirstName(Name):
+    """ Only returns first names. """
+    def next(self):
+        return u'%s'[:self.max_length] % self.first_names.next()
+
+class LastName(Name):
+    """ Only returns last names. """
+    def next(self):
+        return u'%s'[:self.max_length] % self.last_names.next()
 
 
 class LoremIpsum(Tube):
@@ -119,6 +129,12 @@ class Contrib(object):
 
     def next(self):
         return self.backend.next()
+
+    def set_up(self, cls, count, **kwargs):
+        if hasattr(self.backend, 'set_up'):
+            self.backend.set_up(cls, count, **kwargs)
+        else:
+            pass
 
 
 class AlwaysTrue(StaticValue):

@@ -52,14 +52,16 @@ class Command(BaseCommand):
                     generator.set_up(cls, count)
                 fields[field_name] = generator
                 text.append(u'%s: %s; ' % (field_name, fields[field_name]))
-
-        self.stdout.write(u'Generator for %s: %s\n' % (cls, u''.join(text)))
+        try:
+            self.stdout.write(u'Generator for %s: %s\n' % (cls, u''.join(text)))
+        except models.ObjectDoesNotExist:
+            self.stdout.write(u'Generator for %s\n' % u''.join(text))
 
         return fields
 
     def make_object(self, cls, fields):
         obj = cls()
-        self.stdout.write(u'\nCreated new %s: ' % obj)
+        self.stdout.write(u'\nCreated new %s: ' % obj.__class__.__name__)
 
         for field_name, generator in fields.items():
             # Some custom processing

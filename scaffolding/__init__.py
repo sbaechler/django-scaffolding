@@ -7,12 +7,14 @@ from django.conf import settings
 from django.utils.importlib import import_module
 
 from tubes import (Tube, Name, LoremIpsum, RandInt, Contrib, AlwaysTrue,
-    AlwaysFalse, StaticValue, RandomValue, EveryValue, RandomInternetImage, ForeignKey)
+    AlwaysFalse, StaticValue, RandomValue, EveryValue, RandomInternetImage, ForeignKey,
+    FirstName, LastName
+    )
 
 
 __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
     'AlwaysFalse', 'StaticValue', 'RandomValue', 'EveryValue',
-    'RandomInternetImage',
+    'RandomInternetImage', 'FirstName', 'LastName',
     'ForeignKey', 'register', 'scaffold_for_model']
 
 

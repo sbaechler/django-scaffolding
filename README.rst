@@ -113,7 +113,10 @@ Contrib
 -------
 
 Crates a Custom Object. The backend class is the first parameter.
-The backend class has to inherit from Tube.
+The backend class has to inherit from Tube::
+
+    user = scaffolding.Contrib(FacebookTestUser, app_name='contest')
+
 
 FacebookTestUser
 ----------------
@@ -122,4 +125,8 @@ Creates a Facebook User from the test users pool of the Facebook app.
 If there aren't enough test users new ones are automatically created.
 This requires the django-facebook-graph API.
 https://github.com/feinheit/django-facebook-graph
+
+The module is in ``external.facebook_graph``.
+
+
 

@@ -1,9 +1,9 @@
-""" This module still uses the master branch of the graph.
+""" This module uses the structured branch of the graph.
 """
-from facebook.api import GraphAPIError
-from facebook.models import TestUser, User
+from facebook.graph import GraphAPIError
+from facebook.fb import TestUser, User
 from facebook.testusers import TestUsers
-from facebook.utils import get_app_dict, get_static_graph
+from facebook import get_app_dict, get_static_graph
 from scaffolding.tubes import Tube
 
 
@@ -33,9 +33,9 @@ class FacebookTestUser(Tube):
                 pass
             for i in range(remaining):
                 self.generate_new_user()
-        self.user_for_testuser(testuser_list)
+        self._user_for_testuser(testuser_list)
     
-    def user_for_testuser(self, testuser_list):
+    def _user_for_testuser(self, testuser_list):
         try:
             print u'Checking for Facebook Test users...:\n'
         except IOError:
@@ -50,7 +50,7 @@ class FacebookTestUser(Tube):
         except IOError:
             pass
 
-    def generate_new_user(self):
+    def _generate_new_user(self):
         newuser = self.testusers.generate_new_test_user(installed=True, permissions=['email'])
         try:
             print u'Generated new Testuser: %s\n' % newuser
@@ -67,7 +67,7 @@ class FacebookTestUser(Tube):
         if self.index == len(self.users)-1:
             if self.unique:
                 try:
-                    return self.generate_new_user()
+                    return self._generate_new_user()
                 except GraphAPIError:
                     raise StopIteration
             else:
