@@ -25,8 +25,6 @@ Sample ``scaffolds.py``::
     import scaffolding
     from scaffolding.library.flickr import FlickrInteresting
 
-    from myapp.models import Customer
-
     class EntryScaffold(object):
         first_name = scaffolding.FirstName(max_length=32)
         last_name = scaffolding.LastName(max_length=32)
