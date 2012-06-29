@@ -28,11 +28,11 @@ class FacebookTestUser(Tube):
             remaining = count-len(testuser_list)
             try:
                 print 'Not enough Test users (%s). Generating %s more.\n' %(len(testuser_list),
-                                                                self.count-len(testuser_list))
+                                                                count-len(testuser_list))
             except IOError:
                 pass
             for i in range(remaining):
-                self.generate_new_user()
+                self._generate_new_user()
         self._user_for_testuser(testuser_list)
     
     def _user_for_testuser(self, testuser_list):
