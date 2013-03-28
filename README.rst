@@ -109,6 +109,15 @@ AlwaysFalse
 
 Returns False
 
+
+TrueOrFalse
+-----------
+
+Randomly returns true or false.
+You can set a ratio for true or false by specifying true or false:
+e.g. ``false=3`` returns 3 times as many False than Trues.
+
+
 Contrib
 -------
 

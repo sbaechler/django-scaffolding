@@ -4,7 +4,7 @@ import os
 import random
 import urllib
 
-from scaffolding.library import lorem_ipsum, names
+from scaffolding.library import lorem_ipsum
 from django.core.files import File
 
 class Tube(object):
@@ -63,6 +63,7 @@ class Name(Tube):
     """ Generates a random name. <gender> can be 'male', 'female', 'm' or 'f'.
     """
     def __init__(self, max_length=30, gender=None, **kwargs):
+        from scaffolding.library import names
         super(Name, self).__init__(**kwargs)
         self.max_length = max_length
         self.first_names = names.FirstNames(gender=gender)
@@ -80,6 +81,16 @@ class LastName(Name):
     """ Only returns last names. """
     def next(self):
         return u'%s'[:self.max_length] % self.last_names.next()
+
+
+class BookTitle(Tube):
+    def __init__(self, **kwargs):
+        from scaffolding.library import booktitles
+        super(BookTitle, self).__init__(**kwargs)
+        self.title = booktitles.Title()
+
+    def next(self):
+        return self.title.next()
 
 
 class LoremIpsum(Tube):
@@ -147,6 +158,16 @@ class AlwaysFalse(StaticValue):
     """ Always returns False."""
     def __init__(self):
         self.value = False
+
+
+class TrueOrFalse(RandomValue):
+    """ Randomly returns true or false.
+        You can set a ratio for true or false by specifying true and false:
+        e.g. true=1, false=3 returns 3 times as many False than Trues.
+    """
+    def __init__(self, true=1, false=1):
+        self.lst = [True for i in range(true)]
+        self.lst.extend([False for i in range(false)])
 
 
 class RandomInternetImage(Tube):
