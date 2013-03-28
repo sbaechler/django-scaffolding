@@ -93,6 +93,13 @@ Takes a queryset and iterates through it. Assigns the
 item as ForeignKeys to the field. Wraps around if there
 are not enough items.
 
+ForeignKeyOrNone
+----------------
+
+The same for nullable ForeignKeys.
+``split`` is the weight for positives. 0.2 yields 80% None.
+
+
 RandomInternetImage
 -------------------
 
@@ -102,12 +109,12 @@ A Flickr 'Daily Interesting images' grabber is included.
 AlwaysTrue
 ----------
 
-Returns True
+Returns ``True``
 
 AlwaysFalse
 -----------
 
-Returns False
+Returns ``False``
 
 
 TrueOrFalse
@@ -122,7 +129,7 @@ RandomDate
 ----------
 
 Creates a random date between ``startdate`` and ``enddate``.
-``startdate`` and ``enddate`` have to be datetime.date instances.
+``startdate`` and ``enddate`` have to be ``datetime.date`` instances.
 
 
 Contrib

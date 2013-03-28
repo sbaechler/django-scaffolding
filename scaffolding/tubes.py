@@ -192,6 +192,26 @@ class ForeignKey(EveryValue):
         super(ForeignKey, self).__init__(queryset[:chunksize])
 
 
+class ForeignKeyOrNone(EveryValue):
+    """ Maybe creates a foreign key, otherwise None.
+        split is the weight for positives. 0.2 yields 80% None.
+    """
+    def __init__(self, queryset, chunksize=100, split=0.5, **kwargs):
+        super(ForeignKeyOrNone, self).__init__(queryset[:chunksize])
+        self.split = split
+
+    def next(self):
+        if self.length == 0:
+            raise StopIteration
+        if random.random() > self.split:
+            return None
+        else:
+            self.index += 1
+            return self.values[self.index % self.length]
+
+
+
+
 class RandomDate(Tube):
     """ Creates a date between startdate and enddate  """
     def __init__(self, startdate, enddate, **kwargs):
