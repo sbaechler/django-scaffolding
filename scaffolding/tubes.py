@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import os
 import random
 import urllib
+import datetime
 
 from scaffolding.library import lorem_ipsum
 from django.core.files import File
@@ -189,3 +190,24 @@ class ForeignKey(EveryValue):
     """
     def __init__(self, queryset, chunksize=100, **kwargs):
         super(ForeignKey, self).__init__(queryset[:chunksize])
+
+
+class RandomDate(Tube):
+    """ Creates a date between startdate and enddate  """
+    def __init__(self, startdate, enddate, **kwargs):
+        super(RandomDate, self).__init__(**kwargs)
+        if not (isinstance(startdate, datetime.date) and
+                isinstance(enddate, datetime.date)):
+            raise AttributeError(
+                "startdate and enddate must be instances of datetime.date")
+        if enddate < startdate:
+            raise AttributeError(
+                "enddate must be after startdate"
+            )
+        self.startdate = startdate
+        self.enddate = enddate
+
+    def next(self):
+        delta = (self.enddate - self.startdate).days
+        return self.startdate + datetime.timedelta(random.randint(0, delta))
+

@@ -8,14 +8,14 @@ from django.utils.importlib import import_module
 
 from tubes import (Tube, Name, LoremIpsum, RandInt, Contrib, AlwaysTrue,
     AlwaysFalse, StaticValue, RandomValue, EveryValue, RandomInternetImage,
-    ForeignKey, FirstName, LastName, TrueOrFalse, BookTitle
+    ForeignKey, FirstName, LastName, TrueOrFalse, BookTitle, RandomDate
     )
 
 
 __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
     'AlwaysFalse', 'StaticValue', 'RandomValue', 'EveryValue',
     'RandomInternetImage', 'FirstName', 'LastName',
-    'TrueOrFalse', 'BookTitle',
+    'TrueOrFalse', 'BookTitle', 'RandomDate',
     'ForeignKey', 'register', 'scaffold_for_model']
 
 

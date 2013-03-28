@@ -118,6 +118,13 @@ You can set a ratio for true or false by specifying true or false:
 e.g. ``false=3`` returns 3 times as many False than Trues.
 
 
+RandomDate
+----------
+
+Creates a random date between ``startdate`` and ``enddate``.
+``startdate`` and ``enddate`` have to be datetime.date instances.
+
+
 Contrib
 -------
 
