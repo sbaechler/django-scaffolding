@@ -132,6 +132,12 @@ Creates a random date between ``startdate`` and ``enddate``.
 ``startdate`` and ``enddate`` have to be ``datetime.date`` instances.
 
 
+UsCity
+------
+
+Returns a name of a US city and state. e.g. "New York, NY".
+
+
 Contrib
 -------
 

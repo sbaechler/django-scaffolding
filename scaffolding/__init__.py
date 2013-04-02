@@ -9,13 +9,12 @@ from django.utils.importlib import import_module
 from tubes import (Tube, Name, LoremIpsum, RandInt, Contrib, AlwaysTrue,
     AlwaysFalse, StaticValue, RandomValue, EveryValue, RandomInternetImage,
     ForeignKey, FirstName, LastName, TrueOrFalse, BookTitle, RandomDate,
-    ForeignKeyOrNone
+    ForeignKeyOrNone, USCity
     )
-
 
 __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
     'AlwaysFalse', 'StaticValue', 'RandomValue', 'EveryValue',
-    'RandomInternetImage', 'FirstName', 'LastName',
+    'RandomInternetImage', 'FirstName', 'LastName', 'USCity',
     'TrueOrFalse', 'BookTitle', 'RandomDate', 'ForeignKeyOrNone',
     'ForeignKey', 'register', 'scaffold_for_model']
 

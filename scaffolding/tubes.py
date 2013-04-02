@@ -231,3 +231,9 @@ class RandomDate(Tube):
         delta = (self.enddate - self.startdate).days
         return self.startdate + datetime.timedelta(random.randint(0, delta))
 
+
+class USCity(RandomValue):
+    def __init__(self):
+        from .library.cities import TopUsCities
+        top_us = TopUsCities()
+        self.lst = top_us()
