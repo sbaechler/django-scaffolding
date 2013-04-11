@@ -60,6 +60,22 @@ class EveryValue(Tube):
         return self.values[self.index % self.length]
 
 
+class OrNone(Tube):
+    """
+    Yields values from the passed class or None.
+    """
+    def __init__(self, cls, split=0.5, *args, **kwargs):
+        self.split = split
+        self.cls = cls(*args, **kwargs)
+
+
+    def next(self):
+        if random.random() > self.split:
+            return None
+        else:
+            return self.cls.next()
+
+
 class Name(Tube):
     """ Generates a random name. <gender> can be 'male', 'female', 'm' or 'f'.
     """
@@ -192,24 +208,12 @@ class ForeignKey(EveryValue):
         super(ForeignKey, self).__init__(queryset[:chunksize])
 
 
-class ForeignKeyOrNone(EveryValue):
+class ForeignKeyOrNone(OrNone):
     """ Maybe creates a foreign key, otherwise None.
         split is the weight for positives. 0.2 yields 80% None.
     """
-    def __init__(self, queryset, chunksize=100, split=0.5, **kwargs):
-        super(ForeignKeyOrNone, self).__init__(queryset[:chunksize])
-        self.split = split
-
-    def next(self):
-        if self.length == 0:
-            raise StopIteration
-        if random.random() > self.split:
-            return None
-        else:
-            self.index += 1
-            return self.values[self.index % self.length]
-
-
+    def __init__(self, **kwargs):
+        super(ForeignKeyOrNone, self).__init__(cls=ForeignKey, **kwargs)
 
 
 class RandomDate(Tube):

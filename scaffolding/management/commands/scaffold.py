@@ -57,11 +57,19 @@ class Command(BaseCommand):
         except models.ObjectDoesNotExist:
             self.stdout.write(u'Generator for %s\n' % u''.join(text))
 
+        if hasattr(scaffold, 'finalize') and hasattr(scaffold.finalize, '__call__'):
+            fields['_finalize'] = scaffold.finalize
+
         return fields
 
     def make_object(self, cls, fields):
         obj = cls()
         self.stdout.write(u'\nCreated new %s: ' % obj.__class__.__name__)
+        finalize = None
+        try:
+            finalize = fields.pop('_finalize')
+        except KeyError:
+            pass
 
         for field_name, generator in fields.items():
             # Some custom processing
@@ -75,6 +83,13 @@ class Command(BaseCommand):
                 setattr(obj, field_name, value)
             try:
                 self.stdout.write(u'%s: %s; ' % (field_name, value))
-            except UnicodeEncodeError:
+            except (UnicodeEncodeError, TypeError):
                 pass
         obj.save()
+        if finalize:
+            try:
+                finalize(obj)
+            except Exception as e:
+                self.stdout.write(u"Error finalizing Obj %s: " % e.message)
+            else:
+                obj.save()

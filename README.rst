@@ -125,6 +125,36 @@ You can set a ratio for true or false by specifying true or false:
 e.g. ``false=3`` returns 3 times as many False than Trues.
 
 
+StaticValue
+-----------
+
+Takes one argument ``value`` and assigns it to the field.
+
+
+RandomValue
+-----------
+
+Takes a list (not an iterable) as its ``lst`` argument and returns an
+element from it.
+
+
+Every Value
+-----------
+
+Takes an iterable as its ``values`` argument and loops through them in order.
+
+
+OrNone
+------
+
+This is a special tube that takes another tube as its first argument.
+It assigns a value from the passed class or None. This is useful for nullable
+fields. You can pass the arguments for the wrapped class as arguments to the
+OrNone class. There is one additional argument: ``split``. This defines a ratio
+of useful to None. A ratio of 0.2 will give you 80% None.
+
+
+
 RandomDate
 ----------
 
