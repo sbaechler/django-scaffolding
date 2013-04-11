@@ -75,6 +75,21 @@ class OrNone(Tube):
         else:
             return self.cls.next()
 
+class OrBlank(Tube):
+    """
+    Yields values from the passed class or "".
+    """
+    def __init__(self, cls, split=0.5, *args, **kwargs):
+        self.split = split
+        self.cls = cls(*args, **kwargs)
+
+
+    def next(self):
+        if random.random() > self.split:
+            return ""
+        else:
+            return self.cls.next()
+
 
 class Name(Tube):
     """ Generates a random name. <gender> can be 'male', 'female', 'm' or 'f'.
@@ -241,3 +256,10 @@ class USCity(RandomValue):
         from .library.cities import TopUsCities
         top_us = TopUsCities()
         self.lst = top_us()
+
+
+class URL(RandomValue):
+    def __init__(self, prefix='http://'):
+        from .library.url import TopUrl
+        urls = TopUrl(prefix=prefix)
+        self.lst = urls()

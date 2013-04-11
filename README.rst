@@ -99,6 +99,11 @@ ForeignKeyOrNone
 The same for nullable ForeignKeys.
 ``split`` is the weight for positives. 0.2 yields 80% None.
 
+ForeignKeyOrBlank
+-----------------
+
+The same as ForeignKeyOrNone, but uses a blank string instead of None.
+
 
 RandomInternetImage
 -------------------
