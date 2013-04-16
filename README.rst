@@ -1,7 +1,8 @@
 Introduction
 ============
 
-Django-Scaffolding creates placeholder data for your app. 
+Django-Scaffolding creates placeholder data for your app.
+Placeholders can be any type like names, cities, images and instances of your models.
 It's not a mocking framework, it creates real django model instances.
 
 
