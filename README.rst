@@ -77,6 +77,13 @@ Name
 
 Generates a random name. <gender> can be 'male', 'female', 'm' or 'f'.
 
+
+FirstName and LastName
+----------------------
+
+Generates only first or last name. Takes the ``gender`` attribute as well.
+
+
 LoremIpsum
 ----------
 
@@ -91,7 +98,7 @@ ForeignKey
 ----------
 
 Takes a queryset and iterates through it. Assigns the
-item as ForeignKeys to the field. Wraps around if there
+item as ``ForeignKey``s to the field. Wraps around if there
 are not enough items.
 
 ForeignKeyOrNone
@@ -106,6 +113,32 @@ RandomInternetImage
 
 Creates a random image for an ImageField using an internet source.
 A Flickr 'Daily Interesting images' grabber is included.
+
+
+RandomDate
+----------
+
+Creates a random date between ``startdate`` and ``enddate``.
+``startdate`` and ``enddate`` have to be ``datetime.date`` instances.
+
+
+UsCity
+------
+
+Returns a name of a US city and state. e.g. "New York, NY".
+
+
+BookTitle
+---------
+
+Creates a book title.
+This is a python implementation of the `Random Title Generator <http://mdbenoit.com/rtg.htm>`_.
+
+
+URL
+---
+
+Creates a URL from a list of about 10000 URLs.
 
 
 AlwaysTrue
@@ -162,19 +195,6 @@ OrBlank
 
 The same as OrNone, but uses a blank string instead of None.
 Ideal for text fields that have ``blank=True``.
-
-
-RandomDate
-----------
-
-Creates a random date between ``startdate`` and ``enddate``.
-``startdate`` and ``enddate`` have to be ``datetime.date`` instances.
-
-
-UsCity
-------
-
-Returns a name of a US city and state. e.g. "New York, NY".
 
 
 Contrib
