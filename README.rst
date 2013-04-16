@@ -1,8 +1,8 @@
 Introduction
 ============
 
-Django-Scaffolding creates placeholder data for your app.
-Placeholders can be any type like names, cities, images and instances of your models.
+Django-Scaffolding creates pseudo-real-world placeholder data for your app.
+Data can be any type like names, cities, images and instances of your models.
 It's not a mocking framework, it creates real django model instances.
 
 
@@ -100,11 +100,6 @@ ForeignKeyOrNone
 The same for nullable ForeignKeys.
 ``split`` is the weight for positives. 0.2 yields 80% None.
 
-ForeignKeyOrBlank
------------------
-
-The same as ForeignKeyOrNone, but uses a blank string instead of None.
-
 
 RandomInternetImage
 -------------------
@@ -112,10 +107,12 @@ RandomInternetImage
 Creates a random image for an ImageField using an internet source.
 A Flickr 'Daily Interesting images' grabber is included.
 
+
 AlwaysTrue
 ----------
 
 Returns ``True``
+
 
 AlwaysFalse
 -----------
@@ -159,6 +156,12 @@ fields. You can pass the arguments for the wrapped class as arguments to the
 OrNone class. There is one additional argument: ``split``. This defines a ratio
 of useful to None. A ratio of 0.2 will give you 80% None.
 
+
+OrBlank
+-----------------
+
+The same as OrNone, but uses a blank string instead of None.
+Ideal for text fields that have ``blank=True``.
 
 
 RandomDate
