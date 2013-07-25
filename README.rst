@@ -172,6 +172,9 @@ RandomValue
 
 Takes a list (not an iterable) as its ``lst`` argument and returns an
 element from it.
+You can use this for choice fields as well::
+
+  [c[0] for c in MyModel.MYCHOICES]
 
 
 Every Value
