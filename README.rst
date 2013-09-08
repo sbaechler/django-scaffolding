@@ -45,14 +45,14 @@ Run the management command to create the data::
 
     manage.py scaffold myapp.MyModel 20
 
-The number stands for the amout of entries to be created.
+The number stands for the number of entries to be created.
 
 
-Using scaffolding in interpreter or views
-=========================================
+Using scaffolding in the interpreter or in views
+================================================
 
 You can try out the included classes or your own modules in the shell.
-All classes are generators (called Tubes) that generate the field's values.
+All classes are generators (called Tubes) that generate the values for the fields.
 start ./manage.py shell::
 
     >>> from scaffolding import *
@@ -98,7 +98,7 @@ ForeignKey
 ----------
 
 Takes a queryset and iterates through it. Assigns the
-item as ``ForeignKey``s to the field. Wraps around if there
+item as ``ForeignKey`` to the field. Wraps around if there
 are not enough items.
 
 ForeignKeyOrNone
@@ -138,7 +138,7 @@ This is a python implementation of the `Random Title Generator <http://mdbenoit.
 URL
 ---
 
-Creates a URL from a list of about 10000 URLs.
+Creates a linkable to URL from a list of about 10000 URLs.
 
 
 AlwaysTrue
