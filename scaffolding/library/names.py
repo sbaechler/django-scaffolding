@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 import random
 
-US_MALE_NAMES = ['Jacob', 'Ethan', 'Michael', 'Alexander', 'William', 'Joshua','Daniel',
-                 'Jayden', 'Noah', 'Anthony']
+US_MALE_NAMES = ['Jacob', 'Ethan', 'Michael', 'Alexander', 'William', 'Joshua', 'Daniel',
+                 'Jayden', 'Noah', 'Anthony', 'Jonathan', 'David', 'John', 'Mark', 'Calvin',
+                 'Jeremy', 'Ethan', 'Phillip', 'Brian', 'Isaac', 'Abraham', 'Jesse', 'Lawrence',
+                 'Jeffrey', 'Steve', 'Paul', 'Robert', 'Winston', 'Ken', 'Caleb', 'George',
+                 'Brent', 'Joseph', 'Ian', 'Peter', 'Luke', 'Ted', 'Andrew', 'Joe', 'Dennis',
+                 'Bill', 'Felix', 'Don', 'Oliver', 'Harry', 'Samuel', 'Justin', 'Brooks']
 US_FEMALE_NAMES = ['Isabella', 'Emma', 'Olivia', 'Sophia', 'Ava', 'Emily', 'Madison',
-                   'Abigail','Chloe', 'Mia']
+                   'Abigail','Chloe', 'Mia', 'Alice', 'Helen', 'Grace', 'Joanna', 'Ann',
+                   'Lisa', 'Lily,' 'May', 'June', 'April', 'Jane', 'Elise', 'Kristy', 
+                   'Katie', 'Kathy', 'Julie', 'Jamie', 'Carol', 'Carrie', 'Elizabeth',
+                   'Robin', 'Sally', 'Jackie', 'Sherry', 'Christine', 'Angela', 'Judy', 
+                   'Ruth', 'Brooke', 'Megan', 'Dawn', 'Rebecca', 'Esther', 'Claire']
 
 class FirstNames(object):
     """ can iterate over names for the given gender.
