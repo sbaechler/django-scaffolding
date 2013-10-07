@@ -1,0 +1,11 @@
+Main Authors
+------------
+
+Simon Bächler (sbaechler)
+Matthias Kestenholz (matthiask)
+
+
+Contributors
+------------
+
+Jonathan Tien (ricefield)

@@ -40,7 +40,7 @@ class FirstNames(object):
 
 GERMAN_LAST_NAMES = [u'Müller', u'Schmid', u'Schneider', u'Fischer', u'Weber', u'Meyer',
                      u'Wagner', u'Becker', u'Schutz', u'Hoffmann', u'Schäfer',
-                     u'Koch', u'Bauer', u'Richter']
+                     u'Koch', u'Bauer', u'Richter', u'Bächler', u'Kestenholz']
                      
 ASIAN_LAST_NAMES = ['Wang', 'Chen', 'Chou', 'Tang', 'Huang', 'Liu', 'Shih', 'Su', 'Song',
                     'Lin', 'Yu', 'Yang', 'Chan', 'Tsai', 'Wong', 'Hsu', 'Chang', 'Cheng',
