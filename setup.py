@@ -8,7 +8,7 @@ packages, package_data = setuplib.find_packages('scaffolding')
 
 setup(
     name='django-scaffolding',
-    version='0.2.1',
+    version='0.2.2',
     author='Simon Baechler',
     author_email='simon@stellanera.com',
     packages=packages,
