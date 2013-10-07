@@ -8,4 +8,5 @@
 /dist
 /build
 /MANIFEST
+/venv
 *.egg-info
