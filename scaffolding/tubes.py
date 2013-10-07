@@ -114,6 +114,15 @@ class LastName(Name):
     def next(self):
         return u'%s'[:self.max_length] % self.last_names.next()
 
+class RandomEmail(Tube):
+    """ Return a random email. """
+
+    def __init__(self, length=8, domain="email.com"):
+        self.length = length
+        self.domain = domain
+
+    def next(self):
+        return ''.join(random.choice(string.ascii_lowercase) for x in range(self.length)) + self.domain
 
 class BookTitle(Tube):
     def __init__(self, **kwargs):
