@@ -141,6 +141,12 @@ URL
 Creates a linkable to URL from a list of about 10000 URLs.
 
 
+RandomEmail
+-----------
+
+Creates a random email. Parameters are ``length`` and ``domain``.
+
+
 AlwaysTrue
 ----------
 

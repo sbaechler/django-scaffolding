@@ -4,6 +4,7 @@ import os
 import random
 import urllib
 import datetime
+import string
 
 from scaffolding.library import lorem_ipsum
 from django.core.files import File
@@ -117,12 +118,13 @@ class LastName(Name):
 class RandomEmail(Tube):
     """ Return a random email. """
 
-    def __init__(self, length=8, domain="email.com"):
+    def __init__(self, length=8, domain="example.com"):
         self.length = length
         self.domain = domain
 
     def next(self):
-        return ''.join(random.choice(string.ascii_lowercase) for x in range(self.length)) + self.domain
+        return ''.join(random.choice(string.ascii_lowercase)
+                       for x in range(self.length)) + self.domain
 
 class BookTitle(Tube):
     def __init__(self, **kwargs):
