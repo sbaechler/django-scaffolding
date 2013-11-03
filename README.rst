@@ -9,6 +9,8 @@ It's not a mocking framework, it creates real django model instances.
 Usage
 =====
 
+Add     ``scaffolding`` to your INSTALLED_APPS
+
 Create a ``scaffolds.py`` module within your app directory which contains the Scaffolding classes.
 
 Sample ``models.py``::
