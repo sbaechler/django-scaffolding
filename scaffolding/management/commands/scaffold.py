@@ -35,7 +35,9 @@ class Command(BaseCommand):
         for i in range(count):
             self.make_object(model, factory, finalizer)
 
-        self.stdout.write(u'\nCreated %s %ss\n' % (count, model))
+        self.stdout.write(u'\nCreated %s %ss\n' % (count,
+                                                   model._meta.model_name))
+
 
     def make_factory(self, cls, count):
         """ Get the generators from the Scaffolding class within the model.
