@@ -103,17 +103,17 @@ class Name(Tube):
         self.last_names = names.LastNames()
 
     def next(self):
-        return u'%s %s'[:self.max_length] % (self.first_names.next(), self.last_names.next())
+        return '%s %s'[:self.max_length] % (self.first_names.next(), self.last_names.next())
 
 class FirstName(Name):
     """ Only returns first names. """
     def next(self):
-        return u'%s'[:self.max_length] % self.first_names.next()
+        return '%s'[:self.max_length] % self.first_names.next()
 
 class LastName(Name):
     """ Only returns last names. """
     def next(self):
-        return u'%s'[:self.max_length] % self.last_names.next()
+        return '%s'[:self.max_length] % self.last_names.next()
 
 class RandomEmail(Tube):
     """ Return a random email. """
@@ -154,7 +154,7 @@ class LoremIpsum(Tube):
             start = random.randint(0, late_start)
         else:
             start = 0
-        text = u'\n\n'.join(self.text[start:(start+self.paragraphs)])
+        text = '\n\n'.join(self.text[start:(start+self.paragraphs)])
         if self.max_length:
             return text[:self.max_length]
         return text

@@ -12,7 +12,7 @@ class TopUrl(object):
         with open(os.path.join(path, 'top-10kURL.csv'), 'rb') as csvfile:
             reader = csv.reader(csvfile, delimiter=b',', quotechar=b'"')
             for row in reader:
-                self.urls.append(u'%s%s' %(prefix, unicode(row[0], 'utf-8')))
+                self.urls.append('%s%s' % (prefix, unicode(row[0], 'utf-8')))
 
     def __call__(self):
         return self.urls

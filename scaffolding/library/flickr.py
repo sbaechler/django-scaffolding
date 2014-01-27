@@ -26,7 +26,7 @@ class FlickrInteresting(object):
     def next(self):
         if self.index >= self.per_page:
             raise StopIteration
-        url = u'http://farm%(farm_id)s.staticflickr.com/%(server_id)s/%(id)s_%(secret)s.jpg' % {
+        url = 'http://farm%(farm_id)s.staticflickr.com/%(server_id)s/%(id)s_%(secret)s.jpg' % {
             'farm_id': self.photos[self.index].get('farm'),
             'server_id': self.photos[self.index].get('server'),
             'id': self.photos[self.index].get('id'),

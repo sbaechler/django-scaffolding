@@ -45,10 +45,10 @@ class FirstNames(object):
         return self.first_names[self.index % self.length]
 
 
-GERMAN_LAST_NAMES = [u'Müller', u'Schmid', u'Schneider', u'Fischer', u'Weber',
-                     u'Meyer',
-                     u'Wagner', u'Becker', u'Schutz', u'Hoffmann', u'Schäfer',
-                     u'Koch', u'Bauer', u'Richter', u'Bächler', u'Kestenholz']
+GERMAN_LAST_NAMES = ['Müller', 'Schmid', 'Schneider', 'Fischer', 'Weber',
+                     'Meyer',
+                     'Wagner', 'Becker', 'Schutz', 'Hoffmann', 'Schäfer',
+                     'Koch', 'Bauer', 'Richter', 'Bächler', 'Kestenholz']
 
 ASIAN_LAST_NAMES = ['Wang', 'Chen', 'Chou', 'Tang', 'Huang', 'Liu', 'Shih',
                     'Su', 'Song',
