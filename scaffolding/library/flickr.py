@@ -1,5 +1,6 @@
-""" Requires Flickr API: http://stuvel.eu/flickrapi
-"""
+""" Requires Flickr API: http://stuvel.eu/flickrapi """
+from __future__ import absolute_import, unicode_literals
+
 import flickrapi
 
 FLICKR_API_KEY = '93c7a048ba770bf447664589e59110bf'

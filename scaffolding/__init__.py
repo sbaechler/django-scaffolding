@@ -1,26 +1,28 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import, unicode_literals
 import imp
 import sys
 
 from django.conf import settings
 from django.utils.importlib import import_module
 
-from tubes import (Tube, Name, LoremIpsum, RandInt, Contrib, AlwaysTrue,
-    AlwaysFalse, StaticValue, RandomValue, EveryValue, RandomInternetImage,
-    ForeignKey, FirstName, LastName, TrueOrFalse, BookTitle, RandomDate,
-    ForeignKeyOrNone, USCity, URL, OrNone, OrBlank, RandomEmail
-    )
+from .tubes import (Tube, Name, LoremIpsum, RandInt, Contrib,
+                    AlwaysTrue,
+                    AlwaysFalse, StaticValue, RandomValue, EveryValue,
+                    RandomInternetImage,
+                    ForeignKey, FirstName, LastName, TrueOrFalse, BookTitle,
+                    RandomDate,
+                    ForeignKeyOrNone, USCity, URL, OrNone, OrBlank, RandomEmail
+                    )
 
 __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
-    'AlwaysFalse', 'StaticValue', 'RandomValue', 'EveryValue', 'OrNone', 'OrBlank',
-    'RandomInternetImage', 'FirstName', 'LastName', 'USCity', 'URL',
-    'TrueOrFalse', 'BookTitle', 'RandomDate', 'ForeignKeyOrNone',
-    'ForeignKey', 'register', 'scaffold_for_model', 'RandomEmail']
+           'AlwaysFalse', 'StaticValue', 'RandomValue', 'EveryValue', 'OrNone',
+           'OrBlank', 'RandomInternetImage', 'FirstName', 'LastName', 'USCity',
+           'URL', 'TrueOrFalse', 'BookTitle', 'RandomDate', 'ForeignKeyOrNone',
+           'ForeignKey', 'register', 'scaffold_for_model', 'RandomEmail']
 
 
 def generic_autodiscover(module_name):
-
     for app in settings.INSTALLED_APPS:
         try:
             import_module(app)
@@ -37,12 +39,15 @@ def generic_autodiscover(module_name):
 
 _registry = {}
 
+
 def register(model, scaffold):
     _registry[model] = scaffold
 
+
 def scaffold_for_model(model):
     """
-    Returns the scaffold class for a given model (if it has been registered before).
+    Returns the scaffold class for a given model (if it has been registered
+    before).
 
     """
     # Load scaffold modules of all INSTALLED_APPS
