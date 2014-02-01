@@ -17,7 +17,7 @@ FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 class ScaffoldingTests(unittest.TestCase):
 
     def is_string(self, obj):
-        if sys.version_info.major == 2:
+        if sys.version_info[0] == 2:
             self.assertTrue(isinstance(obj, unicode))
         else:
             # Python 3 string

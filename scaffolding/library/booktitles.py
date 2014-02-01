@@ -102,12 +102,12 @@ class Title(object):
         noun = random.choice(NOUNS)
         noun2 = random.choice(NOUNS)
         return random.choice([
-            lambda: u"%s %s" % (adj, noun),
-            lambda: u"The %s %s" % (adj, noun),
-            lambda: u"%s of %s" % (noun, noun2),
-            lambda: u"%s's %s" % (noun, noun2),
-            lambda: u"The %s of the %s" % (noun, noun2),
-            lambda: u"%s in the %s" % (noun, noun2)
+            lambda: "%s %s" % (adj, noun),
+            lambda: "The %s %s" % (adj, noun),
+            lambda: "%s of %s" % (noun, noun2),
+            lambda: "%s's %s" % (noun, noun2),
+            lambda: "The %s of the %s" % (noun, noun2),
+            lambda: "%s in the %s" % (noun, noun2)
         ])()
 
     def next(self):
