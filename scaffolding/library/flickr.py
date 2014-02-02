@@ -1,4 +1,7 @@
-""" Requires Flickr API: http://stuvel.eu/flickrapi """
+""" Requires Flickr API: http://stuvel.eu/flickrapi
+    For Python 3 compatibility use >= 2.0 or tip:
+    https://bitbucket.org/sybren/flickrapi
+"""
 from __future__ import absolute_import, unicode_literals
 
 import flickrapi

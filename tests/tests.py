@@ -83,8 +83,7 @@ class ScaffoldingTests(unittest.TestCase):
         class MockAPI(FlickrAPI):
             def interestingness_getList(self):
                 with open(os.path.join(FIXTURES_PATH, 'flickr_dom.dat'), 'rb') as fixture:
-                    obj = pickle.load(fixture)
-                    return obj
+                    return pickle.load(fixture)
         return MockAPI('', secret='')
 
     @patch('flickrapi.FlickrAPI', mock_api)
