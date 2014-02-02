@@ -5,6 +5,7 @@ Django-Scaffolding creates pseudo-real-world placeholder data for your app.
 Data can be any type like names, cities, images and instances of your models.
 It's not a mocking framework, it creates real django model instances.
 
+.. image:: https://travis-ci.org/sbaechler/django-scaffolding.png?branch=master   :target: https://travis-ci.org/sbaechler/django-scaffolding
 
 Usage
 =====
