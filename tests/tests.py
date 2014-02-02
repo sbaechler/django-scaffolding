@@ -6,6 +6,7 @@ import sys
 import pickle
 import unittest
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from flickrapi import FlickrAPI
 from mock import patch
@@ -14,6 +15,7 @@ from scaffolding import StaticValue, RandInt, EveryValue, AlwaysTrue, \
     AlwaysFalse, BookTitle, Name, URL, LoremIpsum
 
 from scaffolding.library.flickr import FlickrInteresting
+
 
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
