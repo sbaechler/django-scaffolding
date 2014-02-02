@@ -1,18 +1,23 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 import os
-import setuplib
 
-packages, package_data = setuplib.find_packages('scaffolding')
 
 setup(
     name='django-scaffolding',
     version='0.2.3',
     author='Simon Baechler',
     author_email='simon@stellanera.com',
-    packages=packages,
-    package_data=package_data,
+    packages=find_packages(
+        exclude=['tests', 'example']
+    ),
+    package_data={
+        '': ['*.html', '*.txt'],
+        'scaffolding': [
+            'library/*.csv'
+        ]
+    },
     url='https://github.com/sbaechler/django-scaffolding/',
     license='LICENCE',
     description='Automatically generate reasonable database entries for your app',
@@ -23,5 +28,12 @@ setup(
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
     ],
+    zip_safe=False
 )

@@ -1,4 +1,3 @@
 include LICENCE
 include MANIFEST.in
 include README.rst
-include setuplib.py

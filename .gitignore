@@ -10,3 +10,4 @@
 /MANIFEST
 /venv
 *.egg-info
+tests/.tox
