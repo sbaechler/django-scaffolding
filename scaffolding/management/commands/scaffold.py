@@ -24,12 +24,12 @@ class Command(BaseCommand):
         model = loading.get_model(app_label, model_name)
 
         if not isinstance(model, models.base.ModelBase):
-            raise CommandError('%s is not a Django model.' % model)
+            raise CommandError('%s.%s is not a Django model.' % (app_label,
+                                                                 model))
 
         count = int(args[1])
 
         self.stdout.write(u'Creating %s\n' % model)
-
         factory = self.make_factory(model, count)
 
         for i in range(count):
