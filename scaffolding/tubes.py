@@ -1,4 +1,5 @@
 from __future__ import absolute_import, unicode_literals
+import uuid
 
 import os
 import random
@@ -17,9 +18,9 @@ class Tube(object):
 
     def __iter__(self):
         return self
-    
+
     def set_up(self, cls, count, **kwargs):
-        """ This is a hook for doing validations 
+        """ This is a hook for doing validations
             kwargs for future compatibility.
         """
 
@@ -274,3 +275,20 @@ class URL(RandomValue):
         from .library.url import TopUrl
         urls = TopUrl(prefix=prefix)
         self.lst = urls()
+
+
+class Uuid(Tube):
+    """ Generates a unique alphanumeric id """
+    FORMATS = ('uuid', 'hex', 'int')
+    def __init__(self, format='hex'):
+        if format not in self.FORMATS:
+            raise AttributeError('format %s is not valid for UUID field'
+                                 % format)
+        self.format = format
+
+    def next(self):
+        uid = uuid.uuid4()
+        if self.format == 'uuid':
+            return uid
+        else:
+            return getattr(uid, self.format)
