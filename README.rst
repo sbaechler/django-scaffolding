@@ -5,7 +5,8 @@ Django-Scaffolding creates pseudo-real-world placeholder data for your app.
 Data can be any type like names, cities, images and instances of your models.
 It's not a mocking framework, it creates real django model instances.
 
-.. image:: https://travis-ci.org/sbaechler/django-scaffolding.png?branch=master   :target: https://travis-ci.org/sbaechler/django-scaffolding
+.. image:: https://travis-ci.org/sbaechler/django-scaffolding.svg?branch=master
+    :target: https://travis-ci.org/sbaechler/django-scaffolding
 
 Usage
 =====
@@ -203,10 +204,18 @@ of useful to None. A ratio of 0.2 will give you 80% None.
 
 
 OrBlank
------------------
+-------
 
 The same as OrNone, but uses a blank string instead of None.
 Ideal for text fields that have ``blank=True``.
+
+
+Uuid
+----
+
+Generates a unique alphanumeric id. Takes an optional parameter ``format`` which
+can be one of ``uuid``, ``hex`` or ``int``. Default is ``hex``.
+If the format is ``uuid`` it generates a Uuid4 instance.
 
 
 Contrib
