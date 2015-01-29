@@ -43,7 +43,7 @@ Mind the syntax for ForeignKey fields. You can assign an integer to the field
 but make sure the element with the corresponding key does exist. 
 Of course you can also assign an object to the FK field.
 
-To use the flickr library you need to have the Flickr API: http://stuvel.eu/flickrapi installed.
+To use the flickr library you need to have the Flickr API: http://stuvel.eu/flickrapi version 1.4.5 installed.
 
 Run the management command to create the data::
 
