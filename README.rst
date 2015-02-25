@@ -126,6 +126,14 @@ Creates a random date between ``startdate`` and ``enddate``.
 ``startdate`` and ``enddate`` have to be ``datetime.date`` instances.
 
 
+RandomDatetime
+--------------
+
+Creates a random datetime instance between ``startdate`` and ``enddate``.
+``startdate`` and ``enddate`` have to be ``datetime.datetime`` instances.
+If a timezone is passed in the parameter ``timezone``, the instance is timezone-aware.
+
+
 UsCity
 ------
 

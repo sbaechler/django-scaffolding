@@ -6,7 +6,7 @@ import os
 
 setup(
     name='django-scaffolding',
-    version='0.2.4',
+    version='0.2.5-b1',
     author='Simon Baechler',
     author_email='simon@stellanera.com',
     packages=find_packages(

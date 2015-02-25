@@ -11,7 +11,7 @@ from .tubes import (Tube, Name, LoremIpsum, RandInt, Contrib,
                     AlwaysFalse, StaticValue, RandomValue, EveryValue,
                     RandomInternetImage,
                     ForeignKey, FirstName, LastName, TrueOrFalse, BookTitle,
-                    RandomDate,
+                    RandomDate, RandomDatetime,
                     ForeignKeyOrNone, USCity, URL, OrNone, OrBlank,
                     RandomEmail, Uuid
                     )
@@ -19,7 +19,7 @@ from .tubes import (Tube, Name, LoremIpsum, RandInt, Contrib,
 __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
            'AlwaysFalse', 'StaticValue', 'RandomValue', 'EveryValue', 'OrNone',
            'OrBlank', 'RandomInternetImage', 'FirstName', 'LastName', 'USCity',
-           'URL', 'TrueOrFalse', 'BookTitle', 'RandomDate', 'ForeignKeyOrNone',
+           'URL', 'TrueOrFalse', 'BookTitle', 'RandomDate', 'RandomDatetime', 'ForeignKeyOrNone',
            'ForeignKey', 'register', 'scaffold_for_model', 'RandomEmail',
            'Uuid']
 

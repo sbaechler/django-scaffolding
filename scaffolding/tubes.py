@@ -7,8 +7,10 @@ import urllib
 import datetime
 import string
 
-from scaffolding.library import lorem_ipsum
 from django.core.files import File
+from django.utils.timezone import make_aware
+from scaffolding.library import lorem_ipsum
+
 
 class Tube(object):
     """ The base class for scaffolding objects.
@@ -261,6 +263,30 @@ class RandomDate(Tube):
     def next(self):
         delta = (self.enddate - self.startdate).days
         return self.startdate + datetime.timedelta(random.randint(0, delta))
+
+
+class RandomDatetime(Tube):
+    """ Creates a datetime between startdate and enddate. """
+    def __init__(self, startdate, enddate, timezone=None, **kwargs):
+        super(RandomDatetime, self).__init__(**kwargs)
+        if not (isinstance(startdate, datetime.datetime) and
+                isinstance(enddate, datetime.datetime)):
+            raise AttributeError(
+                "startdate and enddate must be instances of datetime.datetime")
+        if enddate < startdate:
+            raise AttributeError(
+                "enddate must be after startdate"
+            )
+        self.startdate = startdate
+        self.enddate = enddate
+        self.timezone = timezone
+
+    def next(self):
+        delta = (self.enddate - self.startdate).days
+        moment = self.startdate + datetime.timedelta(random.randint(0, delta))
+        if self.timezone:
+            moment = make_aware(moment, self.timezone)
+        return moment
 
 
 class USCity(RandomValue):
