@@ -25,6 +25,7 @@ __all__ = ['Tube', 'Name', 'LoremIpsum', 'RandInt', 'Contrib', 'AlwaysTrue',
 
 
 def generic_autodiscover(module_name):
+
     for app in settings.INSTALLED_APPS:
         try:
             import_module(app)

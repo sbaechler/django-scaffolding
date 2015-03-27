@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 import uuid
+from django.db.models.query import QuerySet
 
 import os
 import random
@@ -10,6 +11,7 @@ import string
 from django.core.files import File
 from django.utils.timezone import make_aware
 from scaffolding.library import lorem_ipsum
+import sys
 
 
 class Tube(object):
@@ -234,6 +236,11 @@ class ForeignKey(EveryValue):
     """ Creates a foreign key assigning items from the queryset.
     """
     def __init__(self, queryset, chunksize=100, **kwargs):
+        if not isinstance(queryset, QuerySet):
+            raise AttributeError("queryset needs to be an instance of a Django QuerySet."
+                                 " (got a %s)" % type(queryset))
+        if len(queryset) == 0:
+            sys.stdout.write("Queryset for %s is empty.\n" % queryset.model)
         super(ForeignKey, self).__init__(queryset[:chunksize])
 
 
