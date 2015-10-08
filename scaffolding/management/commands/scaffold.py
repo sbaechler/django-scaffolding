@@ -64,7 +64,6 @@ class Command(BaseCommand):
 
     def make_object(self, cls, fields):
         obj = cls()
-        self.stdout.write(u'\nCreated new %s: ' % obj.__class__.__name__)
         finalize = None
         try:
             finalize = fields.pop('_finalize')
@@ -85,11 +84,13 @@ class Command(BaseCommand):
                 self.stdout.write(u'%s: %s; ' % (field_name, value))
             except (UnicodeEncodeError, TypeError):
                 pass
-        obj.save()
+
         if finalize:
             try:
                 finalize(obj)
             except Exception as e:
                 self.stdout.write(u"Error finalizing Obj %s: " % e.message)
-            else:
-                obj.save()
+                return False
+
+        obj.save()
+        self.stdout.write(u'\nCreated new %s: ' % obj.__class__.__name__)

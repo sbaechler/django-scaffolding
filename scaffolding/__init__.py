@@ -30,7 +30,7 @@ def generic_autodiscover(module_name):
         try:
             import_module(app)
             app_path = sys.modules[app].__path__
-        except AttributeError:
+        except (AttributeError, ImportError):
             continue
         try:
             imp.find_module(module_name, app_path)

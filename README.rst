@@ -20,7 +20,7 @@ Sample ``models.py``::
     class Entry(models.Model):
         first_name = models.CharField('First Name', max_length=32)
         last_name = models.CharField('Last Name', max_length=32)
-        comment = models.TextField('Comment')
+        comment = models.TextField('Comment', blank=True)
         image = models.ImageField(upload_to='uploads/%Y/%m/%d', blank=True, null=True)
         contest = models.ForeignKey(Contest)
         ...
@@ -33,14 +33,20 @@ Sample ``scaffolds.py``::
     class EntryScaffold(object):
         first_name = scaffolding.FirstName(max_length=32)
         last_name = scaffolding.LastName(max_length=32)
-        comment = scaffolding.LoremIpsum(paragraphs=1)
+        comment = scaffolding.OrBlank(scaffolding.LoremIpsum, paragraphs=1)
         contest = scaffolding.ForeignKey(queryset=Contest.objects.filter(name='testcontest'))
         image = scaffolding.RandomInternetImage(backend=FlickrInteresting)
+
+        @classmethod
+        finalize(cls, obj):
+            # Just an example method
+            obj.end_date = obj.start_date + datetime.timedelta(days=60)
+
 
     scaffolding.register(Entry, EntryScaffold)
 
 Mind the syntax for ForeignKey fields. You can assign an integer to the field
-but make sure the element with the corresponding key does exist. 
+but make sure the element with the corresponding key does exist.
 Of course you can also assign an object to the FK field.
 
 To use the flickr library you need to have the Flickr API: http://stuvel.eu/flickrapi version 1.4.5 installed.
@@ -71,6 +77,14 @@ start ./manage.py shell::
     [u'Ethan Schmid']
     >>> n.next()
     [u'Michael Schneider']
+
+
+Using finalize()
+----------------
+
+If a Scaffold class contains a ``finalize(cls, obj)`` class method, the method is called
+after the model is created and before it is saved. This makes it possible to
+set properties which are dependent on field values.
 
 
 Included Tubes
