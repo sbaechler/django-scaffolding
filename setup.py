@@ -6,7 +6,7 @@ import os
 
 setup(
     name='django-scaffolding',
-    version='0.2.5-b1',
+    version='0.2.6',
     author='Simon Baechler',
     author_email='simon@stellanera.com',
     packages=find_packages(
@@ -19,7 +19,7 @@ setup(
         ]
     },
     url='https://github.com/sbaechler/django-scaffolding/',
-    license='LICENCE',
+    license='MIT',
     description='Automatically generate reasonable database entries for your app',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     classifiers=[
