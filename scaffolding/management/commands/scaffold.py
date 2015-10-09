@@ -30,10 +30,10 @@ class Command(BaseCommand):
         count = int(args[1])
 
         self.stdout.write(u'Creating %s\n' % model)
-        factory = self.make_factory(model, count)
+        factory, finalizer = self.make_factory(model, count)
 
         for i in range(count):
-            self.make_object(model, factory)
+            self.make_object(model, factory, finalizer)
 
         self.stdout.write(u'\nCreated %s %ss\n' % (count, model))
 
@@ -43,6 +43,7 @@ class Command(BaseCommand):
         field_names = cls._meta.get_all_field_names()
         fields = {}
         text = []
+        finalizer = None
         scaffold = scaffolding.scaffold_for_model(cls)
 
         for field_name in field_names:
@@ -58,17 +59,12 @@ class Command(BaseCommand):
             self.stdout.write(u'Generator for %s\n' % u''.join(text))
 
         if hasattr(scaffold, 'finalize') and hasattr(scaffold.finalize, '__call__'):
-            fields['_finalize'] = scaffold.finalize
+            finalizer = scaffold.finalize
 
-        return fields
+        return fields, finalizer
 
-    def make_object(self, cls, fields):
+    def make_object(self, cls, fields, finalizer=None):
         obj = cls()
-        finalize = None
-        try:
-            finalize = fields.pop('_finalize')
-        except KeyError:
-            pass
 
         for field_name, generator in fields.items():
             # Some custom processing
@@ -85,9 +81,9 @@ class Command(BaseCommand):
             except (UnicodeEncodeError, TypeError):
                 pass
 
-        if finalize:
+        if finalizer:
             try:
-                finalize(obj)
+                finalizer(obj)
             except Exception as e:
                 self.stdout.write(u"Error finalizing Obj %s: " % e.message)
                 return False
